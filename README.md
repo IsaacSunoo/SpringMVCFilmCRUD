@@ -1,3 +1,3 @@
 ## Spring MVC Film CRUD Project
 
-Week 6 Group Project
+Week 6 Group Project 
