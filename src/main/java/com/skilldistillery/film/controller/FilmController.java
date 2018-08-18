@@ -22,9 +22,9 @@ public class FilmController {
 	  }
 	
 	@RequestMapping(path="GetFilm.do", method=RequestMethod.GET)
-	public ModelAndView getFilmByID(int id) {
+	public ModelAndView getFilmByID(int filmId) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("film", dao.getFilmbyFilmId(id));
+		mv.addObject("film", dao.getFilmbyFilmId(filmId));
 		mv.setViewName("film");
 		return mv;
 	}

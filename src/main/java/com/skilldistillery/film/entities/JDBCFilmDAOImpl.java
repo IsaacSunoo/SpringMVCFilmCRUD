@@ -16,6 +16,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String fullDataQuery = "SELECT title, description, release_year, language_id, rental_duration"
 			+ " rental_rate, length, replacement_cost FROM film";
 	
+	
+	
 	public JDBCFilmDAOImpl() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 	}
@@ -46,8 +48,26 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 
 	@Override
 	public Film getFilmbyTitle(String title) {
-		return null;
+Film film = null;
 		
+		try {
+			Connection conn = DriverManager.getConnection(URL, user, pass);
+			String sql = fullDataQuery + " WHERE title = ?";
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setString(1, "%" + title + "%");
+			
+			ResultSet rs = st.executeQuery();
+			
+			if (rs.next()) {
+				film = new Film(rs.getString(1), rs.getString(2), rs.getShort(3), rs.getInt(4), rs.getInt(5), rs.getDouble(6), rs.getInt(7), rs.getDouble(8));
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return film;
 	}
 	
 	@Override
