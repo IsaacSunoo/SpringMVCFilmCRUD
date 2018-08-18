@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,16 +23,19 @@ public class FilmController {
 	  }
 	
 	@RequestMapping(path="GetFilm.do", params="filmId", method=RequestMethod.GET)
-	public ModelAndView getFilmByID(int filmId) {
+	public ModelAndView getFilmByID(@RequestParam("filmId") String filmId) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(filmId);
-		mv.addObject("film", dao.getFilmbyFilmId(filmId));
+		//System.out.println(filmId);
+		if (!filmId.isEmpty()) {
+		   int iFilmId = Integer.parseInt(filmId);
+		   mv.addObject("film", dao.getFilmbyFilmId(iFilmId));
+		}
 		mv.setViewName("film");
 		return mv;
 	}
 	
-	@RequestMapping(path="GetFilm.do", method=RequestMethod.GET)
-	public ModelAndView getFilmByTitle(String title) {
+	@RequestMapping(path="GetFilm.do", params="title", method=RequestMethod.GET)
+	public ModelAndView getFilmByTitle(@RequestParam("title") String title) {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("film", dao.getFilmbyTitle(title));
 		mv.setViewName("film");
