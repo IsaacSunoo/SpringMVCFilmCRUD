@@ -44,7 +44,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		dao.addNewFilm(film);
 		redir.addFlashAttribute("film", film);
-		mv.setViewName("redirect:filmAdded.do");
+		mv.setViewName("film");
 		return mv;
 	}
 	
