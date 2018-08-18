@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
 public class JDBCFilmDAOImpl implements FilmDAO {
 
@@ -15,7 +14,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "INSERT title, description, release_year, rental_duration, rental_rate, length, replacement_cost FROM film";
+	private final String specificDataQuery = "INSERT title, description, release_year, rental_duration, rental_rate, length, replacement_cost INTO film";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
@@ -76,17 +75,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 		return film;
 	}
-
+	
 	@Override
-	public Film addNewFilm(Scanner input) {
-		Film film = new Film();
-		String title = getInput(input, "Enter the name of the film: ");
-		String description = getInput(input, "Enter a description for the film: ");
-		int releaseYear = getInputInt(input, "Enter the release year: ");
-		int rentalDuration = getInputInt(input, "Enter the rental duration: ");
-		double rentalRate = getInputDouble(input, "Enter the rental rate: ");
-		int length = getInputInt(input, "Enter the length of the film: ");
-		double replacementCost = getInputDouble(input, "Enter the cost for replacement: ");
+	public Film addNewFilm(Film film) {
 
 		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
@@ -94,22 +85,19 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			conn = DriverManager.getConnection(URL, "student", "student");
 			conn.setAutoCommit(false);
 			PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			st.setString(1, title);
-			st.setString(2, description);
-			st.setInt(3, releaseYear);
-			st.setInt(4, rentalDuration);
-			st.setDouble(5, rentalRate);
-			st.setInt(6, length);
-			st.setDouble(7, replacementCost);
+			st.setString(1, film.getTitle());
+			st.setString(2, film.getDescription());
+			st.setInt(3, film.getReleaseYear());
+			st.setInt(4, film.getRentDur());
+			st.setDouble(5, film.getRentRate());
+			st.setInt(6, film.getLength());
+			st.setDouble(7, film.getRepCost());
 			int uc = st.executeUpdate();
 			System.out.println(uc + " film record created.");
 			ResultSet keys = st.getGeneratedKeys();
-			if (keys.next()) {
-				System.out.println("New film ID: " + keys.getInt(1));
-				System.out.println("Film Title: " + title + ", Description: " + description + ", Release year: "
-						+ releaseYear + ", Language ID: " + ", Rental duration: " + rentalDuration
-						+ ", Rental rate: " + rentalRate + ", length: " + length + ", Replacement cost: "
-						+ replacementCost);
+		      if (keys.next()) {
+		        int filmId = keys.getInt(1);
+		        film.setId(filmId);
 			}
 			conn.commit();
 			st.close();
@@ -129,24 +117,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		return film;
 	}
 	
-	private String getInput(Scanner input, String string) {
-		System.out.println(string);
-		String inputString = input.nextLine();
-		return inputString;
-	}
-
-	private int getInputInt(Scanner input, String string) {
-		System.out.println(string);
-		int inputInt = input.nextInt();
-		return inputInt;
-	}
-
-	private double getInputDouble(Scanner input, String string) {
-		System.out.println(string);
-		double inputDouble = input.nextDouble();
-		return inputDouble;
-	}
-
 	@Override
 	public boolean deleteFilm(Film film) {
 		String sql = deleteQuery + "WHERE id = ?";
