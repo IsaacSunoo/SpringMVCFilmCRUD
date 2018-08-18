@@ -18,6 +18,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
+	private final String updateFilm = "UPDATE film SET title = ?, description = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?";
 
 	public JDBCFilmDAOImpl() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -148,9 +149,11 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film editFilm(Film film) {
+	public boolean editFilm(int filmId) {
 
-		return null;
+		
+		
+		return true;
 	}
 
 }
