@@ -119,14 +119,14 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 	
 	@Override
-	public boolean deleteFilm(Film film) {
+	public boolean deleteFilm(int filmId) {
 		String sql = deleteQuery + " WHERE id = ?";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false);
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setInt(1, film.getId());
+			st.setInt(1, filmId);
 			int updateCount = st.executeUpdate();
 			if (updateCount == 1) {
 				conn.commit();

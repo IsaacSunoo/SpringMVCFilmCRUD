@@ -56,15 +56,16 @@ public class FilmController {
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		boolean filmDeleted = dao.deleteFilm(film);
-		if (filmDeleted) {
+		boolean filmDeleted = dao.deleteFilm(film.getId());
+//		if (filmDeleted) {
 			redir.addFlashAttribute("film", film);
 			mv.setViewName("deleteFilm");
 			return mv;
-		}
-		else {
-			return mv;
-		}
+//		}
+//		else {
+//			mv.addObject("film", dao.getFilmbyFilmId(film.getId()));
+//			mv.setViewName("film");
+//			return mv;		}
 	}
 	
 //	**********************  NOT FINISHED
