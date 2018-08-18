@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<c:choose>
+    <c:when test="${! empty film}">
 <table>
 	<tr>
 		<td><h2>ID</h2></td>
@@ -22,6 +24,13 @@
 		<td>${film.description}</td>
 	</tr>
 </table>
+<a href="updateFilm.html">Edit</a><br/>
+<a href="deleteFilm.html">Delete</a>
+   </c:when>
+    <c:otherwise>
+    No Film found
+  </c:otherwise>
+  </c:choose>
 
 </body>
 </html>

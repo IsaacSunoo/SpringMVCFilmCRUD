@@ -5,9 +5,7 @@ public interface FilmDAO {
 	public Film getFilmbyTitle(String title);
 	public Film addNewFilm();
 	public Film deleteFilm();
-	public Film editFilm();
+	public Film editFilm(Film film);
 	// retrieve film and have the option of editing it
-	
-	
 	
 }

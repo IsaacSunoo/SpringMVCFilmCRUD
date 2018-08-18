@@ -13,9 +13,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 	
-	private final String fullDataQuery = "SELECT title, description, release_year, language_id, rental_duration"
-			+ " rental_rate, length, replacement_cost FROM film";
+	private final String fullDataQuery = "SELECT * FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
+	
 	
 	
 	public JDBCFilmDAOImpl() throws ClassNotFoundException {
@@ -89,7 +89,8 @@ Film film = new Film();
 	}
 
 	@Override
-	public Film editFilm() {
+	public Film editFilm(Film film) {
+		
 		return null;
 	}
 

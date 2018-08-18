@@ -6,29 +6,32 @@
   </head>
   <body>
     <form action="UpdateFilm.do" method="POST">
+      <label for="filmId">ID:</label>
+      <input type="text" placeholder="${film.id}" name="id" disabled="disabled">
+      <br>
       <label for="title">Title:</label>
-      <input type="text" name="title">
+      <input type="text" placeholder="${film.title}" name="title">
       <br>
       <label for="description">Description:</label>
-      <input type="text" name="description">
+      <input type="text" placeholder="${film.description}" name="description">
       <br>
       <label for="language">Language:</label>
       <input type="text" placeholder="1" name="language" disabled="disabled">
       <br>
       <label for="releaseYear">Release Year:</label>
-      <input type="text" name="releaseYear">
+      <input type="text" placeholder="${film.releaseYear}" name="releaseYear">
       <br>
       <label for="rating">Rating:</label>
-      <input type="text" name="rating">
+      <input type="text" placeholder="${film.rating}" name="rating">
       <br>
       <label for="length">Film Length:</label>
-      <input type="text" name="length">
+      <input type="text" placeholder="${film.length}" name="length">
       <br>
       <label for="features">Any Special Features:</label>
-      <input type="text" name="features">
+      <input type="text" placeholder="${film.features}" name="features">
       <br>
       <label for="replacement_cost">Film Cost:</label>
-      <input type="text" name="replacement_cost">
+      <input type="text" placeholder="${film.replacement_cost}" name="replacement_cost">
       <br>
       <input type="submit" value="Update Film">
     </form>
