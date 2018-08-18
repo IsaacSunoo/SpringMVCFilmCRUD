@@ -6,32 +6,29 @@
   </head>
   <body>
     <form action="UpdateFilm.do" method="POST">
-      <label for="filmId">ID:</label>
+    <label for="filmId">ID:</label>
       <input type="text" placeholder="${film.id}" name="id" disabled="disabled">
       <br>
-      <label for="title">Title:</label>
-      <input type="text" placeholder="${film.title}" name="title">
+        <label for="title">Title:</label>
+      <input type="text" name="title">
       <br>
       <label for="description">Description:</label>
-      <input type="text" placeholder="${film.description}" name="description">
-      <br>
-      <label for="language">Language:</label>
-      <input type="text" placeholder="1" name="language" disabled="disabled">
+      <input type="text" name="description">
       <br>
       <label for="releaseYear">Release Year:</label>
-      <input type="text" placeholder="${film.releaseYear}" name="releaseYear">
+      <input type="text" name="releaseYear">
       <br>
-      <label for="rating">Rating:</label>
-      <input type="text" placeholder="${film.rating}" name="rating">
+      <label for="rentDur">Rent Duration:</label>
+      <input type="text" name="rentDur">
+      <br>
+      <label for="rentRate">Rent Rate:</label>
+      <input type="text" name="rentRate">
       <br>
       <label for="length">Film Length:</label>
-      <input type="text" placeholder="${film.length}" name="length">
+      <input type="text" name="length">
       <br>
-      <!-- <label for="features">Any Special Features:</label>
-      <input type="text" placeholder="${film.features}" name="features">
-      <br> -->
-      <label for="replacement_cost">Film Cost:</label>
-      <input type="text" placeholder="${film.replacement_cost}" name="replacement_cost">
+      <label for="repCost">Film Cost:</label>
+      <input type="text" name="repCost">
       <br>
       <input type="submit" value="Update Film">
     </form>
