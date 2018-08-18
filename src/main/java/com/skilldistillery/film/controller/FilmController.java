@@ -40,10 +40,10 @@ public class FilmController {
 	
 //	*************************  NOT FINISHED
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
-	public ModelAndView addNewFilm(Scanner input, RedirectAttributes redir) {
+	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		dao.addNewFilm(input);
-		redir.addFlashAttribute("film", input);
+		dao.addNewFilm(film);
+		redir.addFlashAttribute("film", film);
 		mv.setViewName("redirect:filmAdded.do");
 		return mv;
 	}
