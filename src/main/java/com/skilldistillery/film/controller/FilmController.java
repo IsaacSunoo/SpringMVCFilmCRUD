@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controller;
 
+import java.util.Scanner;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +42,7 @@ public class FilmController {
 	
 //	*************************  NOT FINISHED
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
-	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
+	public ModelAndView addNewFilm(Scanner film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		dao.addNewFilm(film);
 		redir.addFlashAttribute("film", film);
