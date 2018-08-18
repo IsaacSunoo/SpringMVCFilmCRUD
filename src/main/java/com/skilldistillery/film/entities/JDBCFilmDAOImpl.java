@@ -120,7 +120,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	
 	@Override
 	public boolean deleteFilm(Film film) {
-		String sql = deleteQuery + "WHERE id = ?";
+		String sql = deleteQuery + " WHERE id = ?";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, user, pass);
