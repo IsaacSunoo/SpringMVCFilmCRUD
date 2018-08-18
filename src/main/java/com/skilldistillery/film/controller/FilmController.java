@@ -46,9 +46,9 @@ public class FilmController {
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		dao.addNewFilm(film);
-		redir.addFlashAttribute("film", film);
-		mv.setViewName("redirect:filmAdded.do");
+		Film newFilm = dao.addNewFilm(film);
+		redir.addFlashAttribute("film", newFilm);
+		mv.setViewName("film");
 		return mv;
 	}
 	
@@ -56,10 +56,15 @@ public class FilmController {
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		dao.deleteFilm(film);
-		redir.addFlashAttribute("film", film);
-		mv.setViewName("redirect:filmDeleted.do");
-		return mv;
+		boolean filmDeleted = dao.deleteFilm(film);
+		if (filmDeleted) {
+			redir.addFlashAttribute("film", film);
+			mv.setViewName("deleteFilm");
+			return mv;
+		}
+		else {
+			return mv;
+		}
 	}
 	
 //	**********************  NOT FINISHED
@@ -68,7 +73,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		dao.editFilm(film);
 		redir.addFlashAttribute("film", film);
-		mv.setViewName("redirect:filmUpdated.do");
+		mv.setViewName("film");
 		return mv;
 	}
 	

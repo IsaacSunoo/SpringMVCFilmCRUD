@@ -25,7 +25,8 @@
 	</tr>
 </table>
 <a href="updateFilm.html">Edit</a><br/>
-<a href="deleteFilm.html">Delete</a>
+<a href="deleteFilm.html">Delete</a><br>
+<a href="index.html">Home</a>
    </c:when>
     <c:otherwise>
     No Film found
