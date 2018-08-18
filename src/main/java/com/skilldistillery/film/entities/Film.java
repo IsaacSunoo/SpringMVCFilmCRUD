@@ -30,7 +30,6 @@ public Film(String title, String description, short releaseYear, int langId, int
 	this.repCost = repCost;
 }
 
-
 public int getId() {
 	return id;
 }
@@ -127,78 +126,6 @@ public void setLanguage(String language) {
 	this.language = language;
 }
 
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((description == null) ? 0 : description.hashCode());
-	result = prime * result + ((features == null) ? 0 : features.hashCode());
-	result = prime * result + id;
-	result = prime * result + langId;
-	result = prime * result + ((language == null) ? 0 : language.hashCode());
-	result = prime * result + length;
-	result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-	result = prime * result + releaseYear;
-	result = prime * result + rentDur;
-	long temp;
-	temp = Double.doubleToLongBits(rentRate);
-	result = prime * result + (int) (temp ^ (temp >>> 32));
-	temp = Double.doubleToLongBits(repCost);
-	result = prime * result + (int) (temp ^ (temp >>> 32));
-	result = prime * result + ((title == null) ? 0 : title.hashCode());
-	return result;
-}
-
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Film other = (Film) obj;
-	if (description == null) {
-		if (other.description != null)
-			return false;
-	} else if (!description.equals(other.description))
-		return false;
-	if (features == null) {
-		if (other.features != null)
-			return false;
-	} else if (!features.equals(other.features))
-		return false;
-	if (id != other.id)
-		return false;
-	if (langId != other.langId)
-		return false;
-	if (language == null) {
-		if (other.language != null)
-			return false;
-	} else if (!language.equals(other.language))
-		return false;
-	if (length != other.length)
-		return false;
-	if (rating == null) {
-		if (other.rating != null)
-			return false;
-	} else if (!rating.equals(other.rating))
-		return false;
-	if (releaseYear != other.releaseYear)
-		return false;
-	if (rentDur != other.rentDur)
-		return false;
-	if (Double.doubleToLongBits(rentRate) != Double.doubleToLongBits(other.rentRate))
-		return false;
-	if (Double.doubleToLongBits(repCost) != Double.doubleToLongBits(other.repCost))
-		return false;
-	if (title == null) {
-		if (other.title != null)
-			return false;
-	} else if (!title.equals(other.title))
-		return false;
-	return true;
-}
 
 @Override
 public String toString() {
