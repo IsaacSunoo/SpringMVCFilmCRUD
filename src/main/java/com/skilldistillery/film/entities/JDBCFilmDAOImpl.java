@@ -14,6 +14,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String pass = "student";
 	
 	private final String fullDataQuery = "SELECT * FROM film";
+	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
 	
 	
@@ -54,7 +55,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 
 	@Override
 	public Film getFilmbyTitle(String title) {
-Film film = new Film();
+		Film film = new Film();
 		
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -79,13 +80,36 @@ Film film = new Film();
 	}
 	
 	@Override
-	public Film addNewFilm() {
+	public Film addNewFilm(Film film) {
 		return null;
 	}
 
 	@Override
-	public Film deleteFilm() {
-		return null;
+	public boolean deleteFilm(Film film) {
+		String sql = deleteQuery + "WHERE id = ?";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false);
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, film.getId());
+			int updateCount = st.executeUpdate();
+			if(updateCount == 1) {
+				conn.commit();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+			      try { conn.rollback(); }
+			      catch (SQLException sqle2) {
+			        System.err.println("Error trying to rollback");
+			      }
+			    }
+			    return false;
+			  }
+		
+		return true;
 	}
 
 	@Override
