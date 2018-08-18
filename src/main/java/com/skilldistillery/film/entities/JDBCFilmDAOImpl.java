@@ -15,7 +15,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "SELECT title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost FROM film";
+	private final String specificDataQuery = "SELECT title, description, release_year, rental_duration, rental_rate, length, replacement_cost FROM film";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
@@ -83,13 +83,12 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		String title = getInput(input, "Enter the name of the film: ");
 		String description = getInput(input, "Enter a description for the film: ");
 		int releaseYear = getInputInt(input, "Enter the release year: ");
-		int languageId = getInputInt(input, "Enter a language id in an int: ");
 		int rentalDuration = getInputInt(input, "Enter the rental duration: ");
 		double rentalRate = getInputDouble(input, "Enter the rental rate: ");
 		int length = getInputInt(input, "Enter the length of the film: ");
 		double replacementCost = getInputDouble(input, "Enter the cost for replacement: ");
 
-		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, "student", "student");
@@ -98,18 +97,17 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			st.setString(1, title);
 			st.setString(2, description);
 			st.setInt(3, releaseYear);
-			st.setInt(4, languageId);
-			st.setInt(5, rentalDuration);
-			st.setDouble(6, rentalRate);
-			st.setInt(7, length);
-			st.setDouble(8, replacementCost);
+			st.setInt(4, rentalDuration);
+			st.setDouble(5, rentalRate);
+			st.setInt(6, length);
+			st.setDouble(7, replacementCost);
 			int uc = st.executeUpdate();
 			System.out.println(uc + " film record created.");
 			ResultSet keys = st.getGeneratedKeys();
 			if (keys.next()) {
 				System.out.println("New film ID: " + keys.getInt(1));
 				System.out.println("Film Title: " + title + ", Description: " + description + ", Release year: "
-						+ releaseYear + ", Language ID: " + languageId + ", Rental duration: " + rentalDuration
+						+ releaseYear + ", Language ID: " + ", Rental duration: " + rentalDuration
 						+ ", Rental rate: " + rentalRate + ", length: " + length + ", Replacement cost: "
 						+ replacementCost);
 			}
