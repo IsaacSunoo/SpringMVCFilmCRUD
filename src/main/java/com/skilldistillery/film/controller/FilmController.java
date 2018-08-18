@@ -71,9 +71,9 @@ public class FilmController {
 	
 //	**********************  NOT FINISHED
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
-	public ModelAndView updateFilm(int filmId, RedirectAttributes redir) {
+	public ModelAndView updateFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		boolean updated = dao.editFilm(filmId);
+		boolean updated = dao.editFilm(film);
 		redir.addFlashAttribute("film", updated);
 		mv.setViewName("film");
 		return mv;
