@@ -14,7 +14,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "INSERT title, description, release_year, lnaguage_id, rental_duration, rental_rate, length, replacement_cost INTO film";
+	private final String specificDataQuery = "INSERT (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost) INTO film";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
@@ -88,10 +88,11 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			st.setString(1, film.getTitle());
 			st.setString(2, film.getDescription());
 			st.setInt(3, film.getReleaseYear());
-			st.setInt(4, film.getRentDur());
-			st.setDouble(5, film.getRentRate());
-			st.setInt(6, film.getLength());
-			st.setDouble(7, film.getRepCost());
+			st.setInt(4, 1);
+			st.setInt(5, film.getRentDur());
+			st.setDouble(6, film.getRentRate());
+			st.setInt(7, film.getLength());
+			st.setDouble(8, film.getRepCost());
 			int uc = st.executeUpdate();
 			System.out.println(uc + " film record created.");
 			ResultSet keys = st.getGeneratedKeys();

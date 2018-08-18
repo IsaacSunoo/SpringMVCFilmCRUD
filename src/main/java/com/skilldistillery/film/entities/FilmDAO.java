@@ -5,6 +5,6 @@ public interface FilmDAO {
 	public Film getFilmbyTitle(String title);
 	public boolean deleteFilm(Film film);
 	public Film editFilm(Film film);
-	Film addNewFilm(Film film);
+	public Film addNewFilm(Film film);
 	
 }
