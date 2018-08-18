@@ -14,7 +14,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "INSERT title, description, release_year, rental_duration, rental_rate, length, replacement_cost INTO film";
+	private final String specificDataQuery = "INSERT title, description, release_year, lnaguage_id, rental_duration, rental_rate, length, replacement_cost INTO film";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
@@ -79,7 +79,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public Film addNewFilm(Film film) {
 
-		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, "student", "student");
