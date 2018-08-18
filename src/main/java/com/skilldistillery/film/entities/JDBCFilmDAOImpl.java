@@ -14,7 +14,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "INSERT (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost) INTO film";
+	private final String specificDataQuery = "INSERT film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost)";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
@@ -87,7 +87,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, film.getTitle());
 			st.setString(2, film.getDescription());
-			st.setInt(3, film.getReleaseYear());
+			st.setShort(3, film.getReleaseYear());
 			st.setInt(4, 1);
 			st.setInt(5, film.getRentDur());
 			st.setDouble(6, film.getRentRate());
