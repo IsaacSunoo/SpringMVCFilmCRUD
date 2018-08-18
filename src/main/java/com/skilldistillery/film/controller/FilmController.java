@@ -37,7 +37,7 @@ public class FilmController {
 		return mv;
 	}
 	
-//	*************************
+//	*************************  NOT FINISHED
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
@@ -47,7 +47,7 @@ public class FilmController {
 		return mv;
 	}
 	
-//	**********************
+//	**********************  NOT FINISHED
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
