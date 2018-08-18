@@ -74,7 +74,7 @@ public class FilmController {
 	public ModelAndView updateFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		boolean updated = dao.editFilm(film);
-		redir.addFlashAttribute("film", updated);
+		redir.addFlashAttribute("film");
 		mv.setViewName("film");
 		return mv;
 	}

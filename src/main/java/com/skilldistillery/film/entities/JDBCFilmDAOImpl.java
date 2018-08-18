@@ -156,13 +156,13 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false);
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setInt(7, filmId);
-			st.setString(1, );
-			st.setInt(7, filmId);
-			st.setInt(7, filmId);
-			st.setInt(7, filmId);
-			st.setInt(7, filmId);
-			st.setInt(7, filmId);
+			st.setInt(7, film.getId());
+			st.setString(1, film.getTitle());
+			st.setString(2, film.getDescription());
+			st.setInt(3, film.getRentDur());
+			st.setDouble(4, film.getRentRate());
+			st.setInt(5, film.getLength());
+			st.setDouble(6, film.getRepCost());
 			int updateCount = st.executeUpdate();
 			if (updateCount == 1) {
 				conn.commit();
