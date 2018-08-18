@@ -12,7 +12,7 @@
 
 <table>
 	<tr>
-		<td><h2>Film ID</h2></td>
+		<td><h2>ID</h2></td>
 		<td><h2>Title</h2></td>
 		<td><h2>Description</h2></td>
 	</tr>

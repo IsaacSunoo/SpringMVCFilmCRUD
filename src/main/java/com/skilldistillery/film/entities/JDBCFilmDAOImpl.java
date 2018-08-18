@@ -42,6 +42,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setDescription(rs.getString(3));
 				film.setTitle(rs.getString(2));
 				film.setId(rs.getInt(1));
+				System.out.println(rs.getInt(1));
 //				film = new Film(rs.getString(1), rs.getString(2), rs.getShort(3), rs.getInt(4), rs.getInt(5), rs.getDouble(6), rs.getInt(7), rs.getDouble(8));
 			}
 			conn.close();
@@ -68,7 +69,7 @@ Film film = new Film();
 			if (rs.next()) {
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
-				film.setId(1);
+				film.setId(rs.getInt(1));
 			}
 			conn.close();
 		} catch (SQLException e) {
