@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JDBCFilmDAOImpl implements FilmDAO {
 
@@ -15,10 +17,11 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String pass = "student";
 
 	private final String specificDataQuery = "INSERT film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost)";
-	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
 	private final String updateFilm = "UPDATE film SET title = ?, description = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?";
+	private final String getActors = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON film_actor.actor_id = actor.id JOIN film on film.id = film_actor.film_id WHERE film_id = ?";
+	private final String getCategory = "SELECT name FROM category JOIN film_category fc ON fc.category_id = category.id JOIN film f ON f.id = fc.film_id WHERE f.id = ?";
 
 	public JDBCFilmDAOImpl() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -42,6 +45,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
 				System.out.println(rs.getInt(1));
+				film.setActors(getActorsByFilmId(id));
+				film.setCategory(getCategoryByFilmId(id));
+				
 //				film = new Film(rs.getString(1), rs.getString(2), rs.getShort(3), rs.getInt(4), rs.getInt(5), rs.getDouble(6), rs.getInt(7), rs.getDouble(8));
 			}
 			conn.close();
@@ -69,6 +75,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
 				film.setId(rs.getInt(1));
+				film.setActors(getActorsByFilmId(rs.getInt(1)));
+				film.setCategory(getCategoryByFilmId(rs.getInt(1)));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -146,6 +154,58 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 
 		return true;
+	}
+	
+	@Override
+	public List<Actor> getActorsByFilmId(int filmId) {
+		List<Actor> actors = new ArrayList<>();
+		try {
+			Connection conn = DriverManager.getConnection(URL, "student", "student");
+			PreparedStatement stmt = conn.prepareStatement(getActors);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String firstName = rs.getString(2);
+				String lastName = rs.getString(3);
+				Actor actor = new Actor(id, firstName, lastName);
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return actors;
+	}
+	
+	@Override
+	public Category getCategoryByFilmId(int filmId) {
+		Category category = new Category();
+		try {
+			Connection conn = DriverManager.getConnection(URL, "student", "student");
+			PreparedStatement stmt = conn.prepareStatement(getCategory);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			
+			
+			if(rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				category = new Category(id, name);
+				
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return category;
 	}
 
 	@Override

@@ -31,6 +31,7 @@ public class FilmController {
 		   mv.addObject("film", dao.getFilmbyFilmId(iFilmId));
 		}
 		mv.setViewName("film");
+//		mv.addObject("listOfActors", actors);
 		return mv;
 	}
 	

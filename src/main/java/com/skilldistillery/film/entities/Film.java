@@ -1,5 +1,8 @@
 package com.skilldistillery.film.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Film {
 	private int id;
 	private String title;
@@ -13,6 +16,8 @@ public class Film {
 	private String features;
 	private String rating;
 	private String language;
+	private List<Actor> actors = new ArrayList<>();
+	private Category category;
 
 public Film() {
 	
@@ -126,6 +131,22 @@ public void setLanguage(String language) {
 	this.language = language;
 }
 
+
+public List<Actor> getActors() {
+	return actors;
+}
+
+public void setActors(List<Actor> actors) {
+	this.actors = actors;
+}
+
+public Category getCategory() {
+	return category;
+}
+
+public void setCategory(Category category) {
+	this.category = category;
+}
 
 @Override
 public String toString() {

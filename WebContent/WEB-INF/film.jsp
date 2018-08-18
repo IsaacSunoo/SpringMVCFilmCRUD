@@ -25,6 +25,7 @@
 		<td><h2>Rental Rate</h2></td>
 		<td><h2>Length</h2></td>
 		<td><h2>Replacement Cost</h2></td>
+		<td><h2>Category</h2></td>
 	</tr>
 	<tr>
 		<td>${film.id}</td>
@@ -35,10 +36,31 @@
 		<td>${film.rentRate}</td>
 		<td>${film.length}</td>
 		<td>${film.repCost}</td>
-		
+		<td>${film.category}</td>
 	</tr>
 </table>
 </div>
+
+<div class="container">
+
+<h2>Actors: </h2>
+	<table>
+		<tr>
+			<td><h2>ID</h2></td>
+			<td><h2>First Name</h2></td>
+			<td><h2>Last Name</h2></td>
+		</tr>
+			<c:forEach var="actor" items="${film.actors}">
+		<tr>
+			<td>${actor.id}</td>
+			<td>${actor.firstName}</td>
+			<td>${actor.lastName}</td>
+		</tr>
+			</c:forEach>
+	</table>
+
+</div>
+
 <a href="updateFilm.html">Edit</a><br/>
 <a href="deleteFilm.html">Delete</a><br>
 <a href="index.html">Home</a>
