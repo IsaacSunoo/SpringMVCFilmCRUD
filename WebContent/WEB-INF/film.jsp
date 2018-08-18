@@ -13,6 +13,8 @@
 
 <c:choose>
     <c:when test="${! empty film}">
+    
+<div class="container-fluid">
 <table>
 	<tr>
 		<td><h2>ID</h2></td>
@@ -36,6 +38,7 @@
 		
 	</tr>
 </table>
+</div>
 <a href="updateFilm.html">Edit</a><br/>
 <a href="deleteFilm.html">Delete</a><br>
 <a href="index.html">Home</a>
