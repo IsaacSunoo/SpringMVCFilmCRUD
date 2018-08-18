@@ -149,10 +149,37 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 
 	@Override
-	public boolean editFilm(int filmId) {
+	public boolean editFilm(Film film) {
+		String sql = updateFilm + " WHERE id = ?";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false);
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(7, filmId);
+			st.setString(1, );
+			st.setInt(7, filmId);
+			st.setInt(7, filmId);
+			st.setInt(7, filmId);
+			st.setInt(7, filmId);
+			st.setInt(7, filmId);
+			int updateCount = st.executeUpdate();
+			if (updateCount == 1) {
+				conn.commit();
+			}
 
-		
-		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			return false;
+		}
+
 		return true;
 	}
 
