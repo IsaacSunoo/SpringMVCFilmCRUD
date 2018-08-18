@@ -15,7 +15,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String user = "student";
 	private final String pass = "student";
 
-	private final String specificDataQuery = "SELECT title, description, release_year, rental_duration, rental_rate, length, replacement_cost FROM film";
+	private final String specificDataQuery = "INSERT title, description, release_year, rental_duration, rental_rate, length, replacement_cost FROM film";
 	private final String fullDataQuery = "SELECT * FROM film";
 	private final String deleteQuery = "DELETE FROM film";
 	private final String shortFilm = "SELECT id, title, description FROM film";
