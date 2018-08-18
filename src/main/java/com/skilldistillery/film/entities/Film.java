@@ -17,7 +17,7 @@ public class Film {
 	private String rating;
 	private String language;
 	private List<Actor> actors = new ArrayList<>();
-	private Category category;
+	private Category category = new Category();
 
 public Film() {
 	

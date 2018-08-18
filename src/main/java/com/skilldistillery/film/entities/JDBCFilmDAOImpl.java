@@ -39,16 +39,12 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			ResultSet rs = st.executeQuery();
 
 			if (rs.next()) {
-//				film = new Film(title, description, releaseYear, langId, rentDur, rentRate, length, repCost)
-
 				film.setId(rs.getInt(1));
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
 				System.out.println(rs.getInt(1));
 				film.setActors(getActorsByFilmId(id));
 				film.setCategory(getCategoryByFilmId(id));
-				
-//				film = new Film(rs.getString(1), rs.getString(2), rs.getShort(3), rs.getInt(4), rs.getInt(5), rs.getDouble(6), rs.getInt(7), rs.getDouble(8));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -56,7 +52,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 		return film;
 	}
-
+	
 	@Override
 	public Film getFilmbyTitle(String title) {
 		Film film = new Film();
@@ -191,12 +187,11 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
 			
-			
 			if(rs.next()) {
 				int id = rs.getInt(1);
 				String name = rs.getString(2);
-				category = new Category(id, name);
-				
+				category.setId(id);
+				category.setName(name);
 			}
 			rs.close();
 			stmt.close();
