@@ -9,6 +9,5 @@ public interface FilmDAO {
 	public boolean updateFilm(Film film);
 	public Film addNewFilm(Film film);
 	List<Actor> getActorsByFilmId(int filmId);
-	Category getCategoryByFilmId(int filmId);
-	
+	public Category getCategoryByFilmId(int filmId);
 }

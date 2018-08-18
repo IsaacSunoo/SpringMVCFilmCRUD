@@ -22,6 +22,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String updateFilm = "UPDATE film SET title = ?, description = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?";
 	private final String getActors = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON film_actor.actor_id = actor.id JOIN film on film.id = film_actor.film_id WHERE film_id = ?";
 	private final String getCategory = "SELECT name FROM category JOIN film_category fc ON fc.category_id = category.id JOIN film f ON f.id = fc.film_id WHERE f.id = ?";
+	private final String getCategoryByTitle = "SELECT name FROM category JOIN film_category fc ON fc.category_id = category.id JOIN film f ON f.id = fc.film_id WHERE f.title = ?";
 
 	public JDBCFilmDAOImpl() throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -80,6 +81,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 		return film;
 	}
+	
 	
 	@Override
 	public Film addNewFilm(Film film) {
