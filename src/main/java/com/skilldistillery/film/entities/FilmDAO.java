@@ -1,7 +1,7 @@
 package com.skilldistillery.film.entities;
 
 public interface FilmDAO {
-	public Film getFilmbyFilmId();
+	public Film getFilmbyFilmId(int id);
 	public Film addNewFilm();
 	public Film deleteFilm();
 	public Film editFilm();
