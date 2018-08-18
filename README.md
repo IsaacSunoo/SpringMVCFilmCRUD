@@ -42,20 +42,35 @@ Tasks:
 
 Isaac
 	- Film Class 
+		Complete
+	-Film DAO
+		Complete
+	- JDBC
 		In Progress
-	
 
 Liam
 	- Servlet
-	- JSP 
-	- XML 
-	- Controller stubbed out
+		In Progress
+	- JSP
+		In Progress 
+	- XML
+		In Progress
+		 
+- Controller stubbed out
 
 Steph
 - First draft of README finished
 	To Do: 
-		- Re-draft as needed as features added.
+		- Re-draft as needed as features added
+		- Lessons learned updated as experiences had.
 		- Complete JUnit Test Cases.
 		
-To 
+To Do:
+	
+- Meet Saturday 
+- Meet Sunday
+- Have coffee.
+- Drink lots of coffee.
+- Have more coffee.
+- 
 	
