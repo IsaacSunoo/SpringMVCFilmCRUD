@@ -149,7 +149,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 
 	@Override
-	public boolean editFilm(Film film) {
+	public boolean updateFilm(Film film) {
 		String sql = updateFilm + " WHERE id = ?";
 		Connection conn = null;
 		try {
