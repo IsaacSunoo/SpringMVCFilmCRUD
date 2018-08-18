@@ -45,6 +45,12 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 
 	@Override
+	public Film getFilmbyTitle(String title) {
+		return null;
+		
+	}
+	
+	@Override
 	public Film addNewFilm() {
 		return null;
 	}
