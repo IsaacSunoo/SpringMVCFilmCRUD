@@ -16,14 +16,15 @@ public class FilmController {
 	@Autowired
 	private FilmDAO dao;
 	
-	@RequestMapping(path = "GetFilm.do", method = RequestMethod.GET)
+	@RequestMapping(path = "ping.do", method = RequestMethod.GET)
 	  public String getInfo() {
 	    return "film";
 	  }
 	
-	@RequestMapping(path="GetFilm.do", method=RequestMethod.GET)
+	@RequestMapping(path="GetFilm.do", params="filmId", method=RequestMethod.GET)
 	public ModelAndView getFilmByID(int filmId) {
 		ModelAndView mv = new ModelAndView();
+		System.out.println(filmId);
 		mv.addObject("film", dao.getFilmbyFilmId(filmId));
 		mv.setViewName("film");
 		return mv;
@@ -48,12 +49,12 @@ public class FilmController {
 	}
 	
 //	**********************  NOT FINISHED
-	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		dao.deleteFilm();
 		redir.addFlashAttribute("film", film);
-		mv.setViewName("redirect:filmAdded.do");
+		mv.setViewName("redirect:filmDeleted.do");
 		return mv;
 	}
 	

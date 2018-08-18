@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>View Details</title>
+<title>${film.title}</title>
 </head>
 <body>
 
