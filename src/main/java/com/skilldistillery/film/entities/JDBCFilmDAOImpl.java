@@ -31,7 +31,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public Film getFilmbyFilmId(int id) {
 		Film film = new Film();
-		List<String> categories = new ArrayList<>();
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -44,9 +43,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setId(rs.getInt(1));
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
-				System.out.println(rs.getInt(1));
+//				System.out.println(rs.getInt(1));
 				film.setActors(getActorsByFilmId(id));
-				categories = getCategoryByFilmId(id);
+				film.setCategories(getCategoryByFilmId(rs.getInt(1)));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -57,7 +56,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	
 	@Override
 	public Film getFilmbyTitle(String title) {
-		List<String> categories = new ArrayList<>();
 		Film film = new Film();
 
 		try {
@@ -75,8 +73,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setDescription(rs.getString(3));
 				film.setId(rs.getInt(1));
 				film.setActors(getActorsByFilmId(rs.getInt(1)));
-				categories = getCategoryByFilmId(rs.getInt(1));
-				film.setCategories(categories);
+				film.setCategories(getCategoryByFilmId(rs.getInt(1)));
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -92,7 +89,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		String sql = specificDataQuery + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection(URL, "student", "student");
+			conn = DriverManager.getConnection(URL, user, pass);
 			conn.setAutoCommit(false);
 			PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			st.setString(1, film.getTitle());
@@ -161,7 +158,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	public List<Actor> getActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList<>();
 		try {
-			Connection conn = DriverManager.getConnection(URL, "student", "student");
+			Connection conn = DriverManager.getConnection(URL, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(getActors);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
@@ -184,18 +181,17 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 	
 	@Override
-	public List<String> getCategoryByFilmId(int filmId) {
-		List<String> categories = new ArrayList<>();
-		Film film = new Film();
+	public String getCategoryByFilmId(int filmId) {
+		String categories = null;
+
 		try {
-			Connection conn = DriverManager.getConnection(URL, "student", "student");
+			Connection conn = DriverManager.getConnection(URL, user, pass);
 			PreparedStatement stmt = conn.prepareStatement(getCategory);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
 				categories = getCategoryByFilmId(filmId);
-				film.setCategories(categories);
 			}
 			rs.close();
 			stmt.close();

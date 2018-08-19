@@ -8,6 +8,6 @@ public interface FilmDAO {
 	public boolean deleteFilm(int filmId);
 	public boolean updateFilm(Film film);
 	public Film addNewFilm(Film film);
-	List<Actor> getActorsByFilmId(int filmId);
-	List<String> getCategoryByFilmId(int filmId);
+	public List<Actor> getActorsByFilmId(int filmId);
+	public String getCategoryByFilmId(int filmId);
 }
