@@ -12,8 +12,48 @@
 <body>
 
 <c:choose>
+    <c:when test="${! empty films}">
+	<div class="container-fluid">
+		<table>
+			<tr>
+				<td><h2>ID</h2></td>
+				<td><h2>Title</h2></td>
+				<td><h2>Description</h2></td>
+				<td><h2>Release Year</h2></td>
+				<td><h2>Rental Duration</h2></td>
+				<td><h2>Rental Rate</h2></td>
+				<td><h2>Length</h2></td>
+				<td><h2>Replacement Cost</h2></td>
+				<td><h2>Category</h2></td>
+			</tr>
+		<c:forEach var="film" items="${films}">
+			<tr>
+				<td>${film.id}</td>
+				<td>${film.title}</td>
+				<td>${film.description}</td>
+				<td>${film.releaseYear}</td>
+				<td>${film.rentDur}</td>
+				<td>${film.rentRate}</td>
+				<td>${film.length}</td>
+				<td>${film.repCost}</td>
+				<td>${film.categories}</td>
+			</tr>
+	<table>
+		<tr>
+			<td><h5>Actors:</h5></td>
+		</tr>
+			<c:forEach var="actor" items="${film.actors}">
+		<tr>
+			<td>${actor.firstName} ${actor.lastName}</td>
+		</tr>
+			</c:forEach>
+	</table>
+			</c:forEach>
+		</table>
+
+   </div> 
+	</c:when>
     <c:when test="${! empty film}">
-    
 <div class="container-fluid">
 <table>
 	<tr>
