@@ -57,8 +57,12 @@ public class FilmController {
 	
 //	**************  BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
-	public ModelAndView deleteFilm(int filmId, RedirectAttributes redir) {
+	public ModelAndView deleteFilm(@RequestParam("filmId") int filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
+		if (filmId == 0) {
+			mv.setViewName("film");
+			return mv;
+		}
 		boolean filmDeleted = dao.deleteFilm(filmId);
 		if (filmDeleted) {
 			redir.addFlashAttribute("film");
@@ -77,7 +81,11 @@ public class FilmController {
 	public ModelAndView updateFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		Film newFilm = film;
-		if ((newFilm.getId() != 0) && !(newFilm.getTitle().isEmpty())) {
+		if ((newFilm.getId() == 0) ) {
+			mv.setViewName("noUpdate");
+			return mv;
+		}
+		else {
 			boolean updated = dao.updateFilm(newFilm);
 			if (updated) {
 				redir.addFlashAttribute("film");
@@ -87,10 +95,6 @@ public class FilmController {
 				mv.setViewName("noUpdate");
 				return mv;
 			} 
-		}
-		else {
-			mv.setViewName("noUpdate");
-			return mv;
 		} 
 	}
 	
