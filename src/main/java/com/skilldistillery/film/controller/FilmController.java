@@ -44,10 +44,13 @@ public class FilmController {
 		return mv;
 	}
 	
+	
+//	************ BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		if (film.getTitle() != null) {
+		String title = film.getTitle();
+		if (!title.isEmpty()) {
 			Film newFilm = dao.addNewFilm(film);
 			redir.addFlashAttribute("film", newFilm);
 		}
@@ -75,7 +78,6 @@ public class FilmController {
 			}
 	}
 	
-//	**************  BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(@RequestParam(value="filmId", defaultValue="0") int filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
