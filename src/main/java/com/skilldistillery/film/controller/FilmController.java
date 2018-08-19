@@ -55,7 +55,6 @@ public class FilmController {
 		return mv;
 	}
 	
-//	**************  BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
 	public ModelAndView deleteFilm(@RequestParam(value="filmId", defaultValue="0") int filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
@@ -80,7 +79,7 @@ public class FilmController {
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(@RequestParam(value="filmId", defaultValue="0") int filmId, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		if ((filmId == 0) ) {
+		if (filmId == 0) {
 			mv.setViewName("noUpdate");
 			return mv;
 		}
