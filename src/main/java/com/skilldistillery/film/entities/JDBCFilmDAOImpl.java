@@ -21,8 +21,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	private final String shortFilm = "SELECT id, title, description FROM film";
 	private final String updateFilm = "UPDATE film SET title = ?, description = ?, rental_duration = ?, rental_rate = ?, length = ?, replacement_cost = ?";
 	private final String getActors = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON film_actor.actor_id = actor.id JOIN film on film.id = film_actor.film_id WHERE film_id = ?";
-	private final String getCategory = "SELECT name FROM category JOIN film_category fc ON fc.category_id = category.id JOIN film f ON f.id = fc.film_id WHERE f.id = ?";
-	private final String getCategoryByTitle = "SELECT name FROM category JOIN film_category fc ON fc.category_id = category.id JOIN film f ON f.id = fc.film_id WHERE f.title = ?";
 	private final String fullQuery = "SELECT f.id, f.title, f.description, f.release_year, f.rental_duration, f.rental_rate, f.length, f.replacement_cost, c.name FROM film f\n JOIN film_category fc ON fc.film_id = f.id JOIN category c ON fc.category_id = c.id";
 	
 
@@ -59,31 +57,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		}
 		return film;
 	}
-	
-//	@Override
-//	public Film getFilmbyFilmId(int id) {
-//		Film film = new Film();
-//
-//		try {
-//			Connection conn = DriverManager.getConnection(URL, user, pass);
-//			String sql = shortFilm + " WHERE id = ?";
-//			PreparedStatement st = conn.prepareStatement(sql);
-//			st.setInt(1, id);
-//			ResultSet rs = st.executeQuery();
-//
-//			if (rs.next()) {
-//				film.setId(rs.getInt(1));
-//				film.setTitle(rs.getString(2));
-//				film.setDescription(rs.getString(3));
-//				film.setActors(getActorsByFilmId(id));
-//				film.setCategories(getCategoryByFilmId(rs.getInt(1)));
-//			}
-//			conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return film;
-//	}
 	
 	@Override
 	public List<Film> getFilmbyTitle(String title) {
@@ -218,29 +191,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		return actors;
 	}
 	
-	@Override
-	public String getCategoryByFilmId(int filmId) {
-		String category = null;
-
-		try {
-			Connection conn = DriverManager.getConnection(URL, user, pass);
-			PreparedStatement stmt = conn.prepareStatement(getCategory);
-			stmt.setInt(1, filmId);
-			ResultSet rs = stmt.executeQuery();
-			
-			if(rs.next()) {
-				category = getCategoryByFilmId(filmId);
-			}
-			rs.close();
-			stmt.close();
-			conn.close();
-			
-		} catch (SQLException e) {
-			System.err.println(e);
-		}
-		return category;
-	}
-
 	@Override
 	public boolean updateFilm(Film film) {
 		String sql = updateFilm + " WHERE id = ?";

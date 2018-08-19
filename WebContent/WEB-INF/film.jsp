@@ -52,6 +52,9 @@
 		</table>
 
    </div> 
+   
+<a href="updateFilm.html">Edit</a><br/>
+<a href="deleteFilm.html">Delete</a><br>
 	</c:when>
     <c:when test="${! empty film}">
 <div class="container-fluid">
