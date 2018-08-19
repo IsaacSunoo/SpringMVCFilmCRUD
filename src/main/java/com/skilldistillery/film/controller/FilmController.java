@@ -44,11 +44,10 @@ public class FilmController {
 		return mv;
 	}
 
-//	************ BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		if (!film.getTitle().isEmpty() || film.getTitle() != null) {
+		if (!film.getTitle().equalsIgnoreCase("title") && !film.getDescription().equalsIgnoreCase("description")) {
 		Film newFilm = dao.addNewFilm(film);
 		redir.addFlashAttribute("film", newFilm);
 		}
