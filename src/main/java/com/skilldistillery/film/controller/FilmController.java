@@ -37,7 +37,9 @@ public class FilmController {
 	@RequestMapping(path="GetFilm.do", params="title", method=RequestMethod.GET)
 	public ModelAndView getFilmByTitle(@RequestParam("title") String title) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("films", dao.getFilmbyTitle(title));
+		if (!title.isEmpty()) {
+			mv.addObject("films", dao.getFilmbyTitle(title));
+		}
 		mv.setViewName("film");
 		return mv;
 	}
