@@ -31,6 +31,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public Film getFilmbyFilmId(int id) {
 		Film film = new Film();
+		List<String> categories = new ArrayList<>();
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -45,7 +46,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setDescription(rs.getString(3));
 				System.out.println(rs.getInt(1));
 				film.setActors(getActorsByFilmId(id));
-				film.setCategory(getCategoryByFilmId(id));
+				categories = getCategoryByFilmId(id);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -56,6 +57,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	
 	@Override
 	public Film getFilmbyTitle(String title) {
+		List<String> categories = new ArrayList<>();
 		Film film = new Film();
 
 		try {
@@ -73,7 +75,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 				film.setDescription(rs.getString(3));
 				film.setId(rs.getInt(1));
 				film.setActors(getActorsByFilmId(rs.getInt(1)));
-				film.setCategory(getCategoryByFilmId(rs.getInt(1)));
+				categories = getCategoryByFilmId(rs.getInt(1));
+				film.setCategories(categories);
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -181,8 +184,9 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	}
 	
 	@Override
-	public Category getCategoryByFilmId(int filmId) {
-		Category category = new Category();
+	public List<String> getCategoryByFilmId(int filmId) {
+		List<String> categories = new ArrayList<>();
+		Film film = new Film();
 		try {
 			Connection conn = DriverManager.getConnection(URL, "student", "student");
 			PreparedStatement stmt = conn.prepareStatement(getCategory);
@@ -190,10 +194,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				int id = rs.getInt(1);
-				String name = rs.getString(2);
-				category.setId(id);
-				category.setName(name);
+				categories = getCategoryByFilmId(filmId);
+				film.setCategories(categories);
 			}
 			rs.close();
 			stmt.close();
@@ -202,7 +204,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 		} catch (SQLException e) {
 			System.err.println(e);
 		}
-		return category;
+		return categories;
 	}
 
 	@Override

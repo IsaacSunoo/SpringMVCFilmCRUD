@@ -36,7 +36,7 @@
 		<td>${film.rentRate}</td>
 		<td>${film.length}</td>
 		<td>${film.repCost}</td>
-		<td>${film.category}</td>
+		<td>${film.categories}</td>
 	</tr>
 </table>
 </div>

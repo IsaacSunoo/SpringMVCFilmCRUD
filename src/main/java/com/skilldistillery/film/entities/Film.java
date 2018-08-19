@@ -17,7 +17,15 @@ public class Film {
 	private String rating;
 	private String language;
 	private List<Actor> actors = new ArrayList<>();
-	private Category category = new Category();
+	private List<String> categories = new ArrayList<>();
+
+public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
 
 public Film() {
 	
@@ -137,14 +145,6 @@ public List<Actor> getActors() {
 
 public void setActors(List<Actor> actors) {
 	this.actors = actors;
-}
-
-public Category getCategory() {
-	return category;
-}
-
-public void setCategory(Category category) {
-	this.category = category;
 }
 
 @Override
