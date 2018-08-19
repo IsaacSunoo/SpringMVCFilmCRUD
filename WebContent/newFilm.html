@@ -7,31 +7,31 @@
   <body>
     <form action="NewFilm.do" method="POST">
       <label for="title">Title:</label>
-      <input type="text" name="title">
+      <input type="text" name="title" required>
       <br>
       <label for="description">Description:</label>
-      <input type="text" name="description">
+      <input type="text" name="description" required>
       <br>
       <!-- <label for="language">Language:</label>
       <input type="text" placeholder="1" name="language" disabled="disabled">
       <br> -->
       <label for="releaseYear">Release Year:</label>
-      <input type="text" name="releaseYear">
+      <input type="text" name="releaseYear" required>
       <br>
       <label for="rentDur">Rent Duration:</label>
-      <input type="text" name="rentDur">
+      <input type="text" name="rentDur" required>
       <br>
       <label for="rentRate">Rent Rate:</label>
-      <input type="text" name="rentRate">
+      <input type="text" name="rentRate" required>
       <br>
       <label for="length">Film Length:</label>
-      <input type="text" name="length">
+      <input type="text" name="length" required>
       <br>
 <!--  <label for="features">Any Special Features:</label>
       <input type="text" name="features">
       <br>-->
       <label for="repCost">Film Cost:</label>
-      <input type="text" name="repCost">
+      <input type="text" name="repCost" required>
       <br>
       <input type="submit" value="Add Film">
     </form>

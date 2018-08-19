@@ -16,25 +16,25 @@ public class FilmController {
 
 	@Autowired
 	private FilmDAO dao;
-	
+
 	@RequestMapping(path = "ping.do", method = RequestMethod.GET)
-	  public String getInfo() {
-	    return "film";
-	  }
-	
-	@RequestMapping(path="GetFilm.do", params="filmId", method=RequestMethod.GET)
+	public String getInfo() {
+		return "film";
+	}
+
+	@RequestMapping(path = "GetFilm.do", params = "filmId", method = RequestMethod.GET)
 	public ModelAndView getFilmByID(@RequestParam("filmId") String filmId) {
 		ModelAndView mv = new ModelAndView();
-		//System.out.println(filmId);
+		// System.out.println(filmId);
 		if (!filmId.isEmpty()) {
-		   int iFilmId = Integer.parseInt(filmId);
-		   mv.addObject("film", dao.getFilmbyFilmId(iFilmId));
+			int iFilmId = Integer.parseInt(filmId);
+			mv.addObject("film", dao.getFilmbyFilmId(iFilmId));
 		}
 		mv.setViewName("film");
 		return mv;
 	}
-	
-	@RequestMapping(path="GetFilm.do", params="title", method=RequestMethod.GET)
+
+	@RequestMapping(path = "GetFilm.do", params = "title", method = RequestMethod.GET)
 	public ModelAndView getFilmByTitle(@RequestParam("title") String title) {
 		ModelAndView mv = new ModelAndView();
 		if (!title.isEmpty()) {
@@ -43,23 +43,22 @@ public class FilmController {
 		mv.setViewName("film");
 		return mv;
 	}
-	
-	
+
 //	************ BUG IN HERE SOMEWHERE
 	@RequestMapping(path = "NewFilm.do", method = RequestMethod.POST)
 	public ModelAndView addNewFilm(Film film, RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
-		String title = film.getTitle();
-		if (!title.isEmpty()) {
-			Film newFilm = dao.addNewFilm(film);
-			redir.addFlashAttribute("film", newFilm);
+		if (!film.getTitle().isEmpty() || film.getTitle() != null) {
+		Film newFilm = dao.addNewFilm(film);
+		redir.addFlashAttribute("film", newFilm);
 		}
 		mv.setViewName("film");
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST)
-	public ModelAndView deleteFilm(@RequestParam(value="filmId", defaultValue="0") int filmId, RedirectAttributes redir) {
+	public ModelAndView deleteFilm(@RequestParam(value = "filmId", defaultValue = "0") int filmId,
+			RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		if (filmId == 0) {
 			mv.setViewName("film");
@@ -70,22 +69,21 @@ public class FilmController {
 			redir.addFlashAttribute("film");
 			mv.setViewName("deleteFilm");
 			return mv;
-		}
-		else {
+		} else {
 			mv.addObject("film", dao.getFilmbyFilmId(filmId));
 			mv.setViewName("film");
 			return mv;
-			}
+		}
 	}
-	
+
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
-	public ModelAndView updateFilm(@RequestParam(value="filmId", defaultValue="0") int filmId, RedirectAttributes redir) {
+	public ModelAndView updateFilm(@RequestParam(value = "filmId", defaultValue = "0") int filmId,
+			RedirectAttributes redir) {
 		ModelAndView mv = new ModelAndView();
 		if (filmId == 0) {
 			mv.setViewName("noUpdate");
 			return mv;
-		}
-		else {
+		} else {
 			Film film = dao.getFilmbyFilmId(filmId);
 			boolean updated = dao.updateFilm(film);
 			if (updated) {
@@ -95,10 +93,10 @@ public class FilmController {
 			} else {
 				mv.setViewName("noUpdate");
 				return mv;
-			} 
-		} 
+			}
+		}
 	}
-	
+
 	public FilmDAO getDao() {
 		return dao;
 	}
