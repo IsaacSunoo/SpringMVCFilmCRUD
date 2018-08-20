@@ -41,7 +41,6 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		if (!title.isEmpty()) {
 			List<Film> films = dao.getFilmbyTitle(title);
-			System.out.println(films);
 			mv.addObject("films", films);
 		}
 		mv.setViewName("film");
