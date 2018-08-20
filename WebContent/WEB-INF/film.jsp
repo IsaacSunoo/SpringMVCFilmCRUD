@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${film.title}</title>
+<title>Results</title>
 </head>
 <body>
 
@@ -37,16 +37,14 @@
 				<td>${film.repCost}</td>
 				<td>${film.categories}</td>
 			</tr>
-	<table>
-		<tr>
-			<td><h5>Actors:</h5></td>
-		</tr>
-			<c:forEach var="actor" items="${film.actors}">
-		<tr>
-			<td>${actor.firstName} ${actor.lastName}</td>
-		</tr>
-			</c:forEach>
-	</table>
+				<tr>
+					<td><h5>Actors:</h5></td>
+				</tr>
+					<c:forEach var="actor" items="${film.actors}">
+				<tr>
+					<td>${actor.firstName} ${actor.lastName}</td>
+				</tr>
+					</c:forEach>
 			</c:forEach>
 		</table>
 

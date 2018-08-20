@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +40,9 @@ public class FilmController {
 	public ModelAndView getFilmByTitle(@RequestParam("title") String title) {
 		ModelAndView mv = new ModelAndView();
 		if (!title.isEmpty()) {
-			mv.addObject("films", dao.getFilmbyTitle(title));
+			List<Film> films = dao.getFilmbyTitle(title);
+			System.out.println(films);
+			mv.addObject("films", films);
 		}
 		mv.setViewName("film");
 		return mv;

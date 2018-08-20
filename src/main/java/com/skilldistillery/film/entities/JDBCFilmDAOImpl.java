@@ -30,8 +30,8 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	
 	@Override
 	public Film getFilmbyFilmId(int id) {
-		Film film = new Film();
 		String sql = fullQuery + " WHERE f.id = ?";
+		Film film = null;
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -40,6 +40,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			ResultSet rs = st.executeQuery();
 
 			if (rs.next()) {
+				film = new Film();
 				film.setId(rs.getInt(1));
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
@@ -61,7 +62,6 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 	@Override
 	public List<Film> getFilmbyTitle(String title) {
 		List<Film> films = new ArrayList<>();
-		Film film = new Film();
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -74,6 +74,7 @@ public class JDBCFilmDAOImpl implements FilmDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
+				Film film = new Film();
 				film.setId(rs.getInt(1));
 				film.setTitle(rs.getString(2));
 				film.setDescription(rs.getString(3));
