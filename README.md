@@ -4,7 +4,7 @@ Week 6 Group Project
 
 Application implements full web-based C.R.U.D. functionality, using Spring MVC and the DAO pattern. The DAO implementation uses JDBC to persist and retrieve data.
 
-###Technology Used:
+### Technology Used:
 * Java
 * Gradle
 * Spring
